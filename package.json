@@ -1,7 +1,7 @@
 {
-  "name": "hello-wap",
+  "name": "wapgpt",
   "version": "1.0.0",
-  "description": "",
+  "description": "A ChatGPT-style AI assistant served over WAP/WML for vintage mobile devices",
   "main": "index.js",
   "type": "module",
   "scripts": {
