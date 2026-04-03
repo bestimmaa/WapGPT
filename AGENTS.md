@@ -176,6 +176,37 @@ Content-Type: text/vnd.wap.wml
 
 Without this, WAP gateways and browsers will not parse the document as WML.
 
+## Docker
+
+The app is containerised. The image contains no secrets — the API key is passed at runtime via the environment.
+
+### Build
+
+```
+docker build -t wapgpt .
+```
+
+### Run
+
+Pass the key explicitly:
+```
+docker run -e OPENAI_API_KEY=sk-... -p 3000:3000 wapgpt
+```
+
+Or use the local `.env` file:
+```
+docker run --env-file .env -p 3000:3000 wapgpt
+```
+
+### Files
+
+| File | Purpose |
+|---|---|
+| `Dockerfile` | Builds the image from `node:22-alpine`, installs prod deps only |
+| `.dockerignore` | Excludes `node_modules/`, `.env`, `.git/`, docs from the build context |
+
+> Never `COPY .env` in the Dockerfile — always inject secrets at runtime.
+
 ## Public Exposure via ngrok
 
 [ngrok](https://ngrok.com) is used to expose the local server to the public internet, which allows real WAP devices and gateways to reach it.
