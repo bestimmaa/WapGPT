@@ -8,11 +8,13 @@ WapGPT is an Express.js server that serves a WML 1.1 website accessible via WAP 
 
 ## Requirements
 
-- Node.js 18+
+- Node.js 18+ **or** Docker
 - An [OpenAI API key](https://platform.openai.com/api-keys)
 - [ngrok](https://ngrok.com) (optional, for exposing to real devices)
 
 ## Setup
+
+### With Node.js
 
 1. **Install dependencies**
    ```
@@ -29,6 +31,27 @@ WapGPT is an Express.js server that serves a WML 1.1 website accessible via WAP 
 3. **Start the server**
    ```
    npm start
+   ```
+
+   The server runs at `http://localhost:3000`.
+
+### With Docker
+
+1. **Build the image**
+   ```
+   docker build -t wapgpt .
+   ```
+
+2. **Run the container**
+
+   Pass the key explicitly:
+   ```
+   docker run -e OPENAI_API_KEY=sk-... -p 3000:3000 wapgpt
+   ```
+
+   Or use your local `.env` file:
+   ```
+   docker run --env-file .env -p 3000:3000 wapgpt
    ```
 
    The server runs at `http://localhost:3000`.
